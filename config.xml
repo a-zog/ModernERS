@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE mers SYSTEM "test.dtd">
+<mers>
+  <config>
+    <eventname>ExpoLugha</eventname>
+    <logo>img/event_registration_system.png</logo>
+    <favicon>img/favicon.png</favicon>
+    <objective>8000</objective>
+    <lastrefresh>1386501593</lastrefresh>
+    <gsid>0AkeGEqLT7tGfdFJxSEF0b0NOWWlwYlJDX0liVXowVkE</gsid>
+    <timezone>Europe/Paris</timezone>
+  </config>
+  <settings>
+    <surname>true</surname>
+    <firstname>true</firstname>
+    <age>true</age>
+    <gender>true</gender>
+    <address>true</address>
+    <email>true</email>
+    <contactnumber>true</contactnumber>
+  </settings>
+</mers>
