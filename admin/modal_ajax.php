@@ -44,7 +44,7 @@ if (isset($_GET["load"])){
 						?>
 						<div id="callback"></div>
 
-						<form class="form-horizontal" action="ajax.php" id="modifyVisitorForm" role="form" method="POST">
+						<form class="form-horizontal" action="../page/ajax.php" id="modifyVisitorForm" role="form" method="POST">
 							<div class="modal-body">
 								<h3><?php echo $userInfo['firstname']." ".$userInfo['lastname']; ?> <small>Edit <span class="zicon-right-open-3"></span></small></h3>
 								<div class="form-group">

@@ -1,12 +1,11 @@
-<?php 
-include('header.php');
-?>
+
+
 
 <div class="container">
 <?php
 $title="Easy Management";
 
-include("em_menu.php");
+include("page/em_menu.php");
 ?>
 
     <div class="col-md-6">
@@ -135,7 +134,7 @@ include("em_menu.php");
 </div>
 </div>
 
-<?php include("footer.php"); ?>
+
 <script type="text/javascript">
 
 
@@ -153,7 +152,7 @@ include("em_menu.php");
      }
 
 
-     $.post("ajax.php", sentData, function(response) {
+     $.post("page/ajax.php", sentData, function(response) {
 
         $("#registrationContainer").html(response);
     });
@@ -186,5 +185,3 @@ include("em_menu.php");
 
 </script>
 
-</body>
-</html>

@@ -26,11 +26,13 @@ Function list:
 	
 	(get)Config(): retrieve the content of the XML File and returns a DomDocument value
 
+	(get/set)TagValue($tag): read/write a $tag value
 	(get/set)EventName(): read/write the current event Name
 	(get/set)EventLogo(): read/write the current event logo
 	(get/set)EventFavIcon(): read/write the current event favicon
-	(get/set)TagValue($tag): read/write a $tag value
 	
+	showLandingPage(): display the MERS landing page
+
 
 	(get/set)LastRefresh(): read/write the last refreshed entries
 	(get)GSID(): retrieve the Google Spreadsheet ID from the database
@@ -45,6 +47,7 @@ Function list:
 	updateVisitorList(): Display the visitor's list retrieved from a Google spreadsheet
 	isUniqueVisitor(): Check if the email of the visitor is unique (database constraint)
 	PrintVisitorBadge(): Launch the print process
+	updateVisitor(): Update (and check) an existing visitor (from the web-based form)
 	addNewVisitor(): Add (and check) a new visitor (from the web-based form)
 	securePostVar(): A function to secure post/get vars and prevent sql injections (and other threats)
 	getVisitorInfo($id): returns an array with information about a visitor
@@ -64,7 +67,7 @@ Function list:
 		private $useXML=false;
 
 		//change if your renamed the file
-		private $xmlConfig="config.xml";
+		private $xmlConfig="config/config.xml";
 
 		public function getXMLConfig(){
 			return $this->xmlConfig;
@@ -123,6 +126,25 @@ Function list:
 
 		}
 
+		public function showLandingPage(){
+   ?>
+   <div class="jumbotron">
+
+
+<?php
+
+?><?php if ($this->getEventLogo() != false) {?> <h1>Welcome to <small><img src="<?php echo $this->getEventLogo(); ?>"/></small></h1> <?php }else{ echo "<h1>Welcome !</h1>";} ?>
+
+                        
+                        
+
+                        <p> 
+                        Welcome to the <?php if ($this->getEventName() != false) {echo $this->getEventName()."'s";}else{ echo "Modern";}  ?> Event Registration Management, This service will allow you to quickly manage visitors the day of the event, even in offline mode.</p>
+                        <p><a href="em.php" class="btn btn-primary btn-lg" data-original-title="" title="">Easy Management <span class="zicon-right-open-5"></span></a></p>
+                    </div>
+
+               <?php
+		}
 
 		public function setLastRefresh($time){
 			mysql_query("UPDATE config SET last_refresh = $time");
@@ -430,9 +452,9 @@ public function updateVisitor($userForm){
 		$age=$this->securePostVar($userForm["age"]);
 		try {
 			$age=intval($age);
-			
+
 		} catch (Exception $e) {
-			
+
 		}
 		if (is_int($age)){
 			$q.= "age= $age,";			
@@ -485,7 +507,7 @@ public function updateVisitor($userForm){
 				<p>The user was succesfully registred in the visitor's database.</p>				
 			</div>
 			<script type="text/javascript">
-				
+
 				$(document).ready( function() {
 					$("#myModal").modal('hide');
 					

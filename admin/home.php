@@ -47,7 +47,7 @@ include('session.php');
 include('modal.php');
 ?>	
 </div>
-<?php include("../footer.php"); ?>
+<?php include("../page/footer.php"); ?>
 
 </body>
 </html>

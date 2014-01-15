@@ -1,6 +1,6 @@
 <?php 
 
-include('dbcon.php');
+include('config/dbcon.php');
 require_once ("lib.php");
 $lib= new ERS;
 
@@ -12,25 +12,25 @@ $lib= new ERS;
 
     <title><?php if ($lib->getEventName() != false) {echo $lib->getEventName()."'s";}else{ echo "Modern";}  ?> Event Registration System V2.0 - By AZOG</title>
 
-    <link href="css/zogstrap.min.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="assets/css/zogstrap.min.css" rel="stylesheet" type="text/css" media="screen">
 
-    <link href="css/datatables.bootstrap.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="css/adds.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="assets/css/datatables.bootstrap.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="assets/css/adds.css" rel="stylesheet" type="text/css" media="screen">
 
 
-<link href="css/zicon.css" rel="stylesheet">
-<link href="css/zicon-ie7.css" rel="stylesheet">
+<link href="assets/css/zicon.css" rel="stylesheet">
+<link href="assets/css/zicon-ie7.css" rel="stylesheet">
 
   <link rel="shortcut icon" href="<?php if ( ($lib->getFavIcon()) ) {echo $lib->getFavIcon();}else{ echo "img/raimbox.gif";}  ?>">
 
 
-    <script src="js/jquery-latest.min.js" type="text/javascript"></script>
-    <script src="js/zogstrap.min.js" type="text/javascript"></script> 
-    <script src="js/jquery.dataTables.js" type="text/javascript"></script>
-    <script src="js/dataTables.bootstrap.js" type="text/javascript"></script>
-    <script src="js/hogan-2.0.0.js" type="text/javascript"></script>
-    <script src="js/typeahead.min.js" type="text/javascript"></script>
-    <script src="js/init.js" type="text/javascript"></script>
+    <script src="assets/js/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="assets/js/zogstrap.min.js" type="text/javascript"></script> 
+    <script src="assets/js/jquery.dataTables.js" type="text/javascript"></script>
+    <script src="assets/js/dataTables.bootstrap.js" type="text/javascript"></script>
+    <script src="assets/js/hogan-2.0.0.js" type="text/javascript"></script>
+    <script src="assets/js/typeahead.min.js" type="text/javascript"></script>
+    <script src="assets/js/init.js" type="text/javascript"></script>
     
 </head>
 
@@ -39,7 +39,11 @@ $lib= new ERS;
 
 
 <body>
+<?php 
 
+
+
+ ?>
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#zs-example-navbar-collapse-1">
@@ -60,15 +64,15 @@ $lib= new ERS;
             <div class="dropdown-backdrop"></div><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="zicon-user"></i> Manage Visitors <b class="caret"></b></a>
             <ul class="dropdown-menu">
 
-                <li><a href="#" ><i class="zicon-eye-1"></i> Overview</a></li>
+                <li><a href="?p=overview" ><i class="zicon-eye-1"></i> Overview</a></li>
                 <li class="divider"></li>
-                <li><a href="em.php"><i class="zicon-address-book"></i> Easy Management</a></li>
-                <li><a href="refresh.php"><i class="zicon-arrows-cw-1"></i> Refresh visitor's list</a></li>
-                <li><a href="#"><i class="zicon-chart-line"></i> Statistics</a></li>
+                <li><a href="?p=em"><i class="zicon-address-book"></i> Easy Management</a></li>
+                <li><a href="?p=refresh"><i class="zicon-arrows-cw-1"></i> Refresh visitor's list</a></li>
+                <li><a href="?p=stats"><i class="zicon-chart-line"></i> Statistics</a></li>
             </ul>
         </li>
 
-        <li><a href="settings.php"><i class="zicon-cog"></i> Settings</a></li>
+        <li><a href="?p=settings"><i class="zicon-cog"></i> Settings</a></li>
         <li><a href="admin"><i class="zicon-key-2"></i> Admin</a></li>
         
     </ul>

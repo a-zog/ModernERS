@@ -1,7 +1,3 @@
-<?php 
-include('header.php');
-?>
-
 
 <div class="container">
     <div class="col-md-6">
@@ -169,9 +165,3 @@ include('header.php');
 
 </div>
 </div>
-<?php include("footer.php"); ?>
-
-
-
-</body>
-</html>

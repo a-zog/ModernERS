@@ -16,31 +16,53 @@
 ?>
 
 <?php 
-include('header.php');
+include('page/header.php');
+$lib=new ERS();
 ?>
 
 
-                 
-
-                    <div class="jumbotron">
 
 
-<?php
-$lib= new ERS;
-?><?php if ($lib->getEventLogo() != false) {?> <h1>Welcome to <small><img src="<?php echo $lib->getEventLogo(); ?>"/></small></h1> <?php }else{ echo "<h1>Welcome !</h1>";} ?>
+<?php 
+if (isset($_GET["p"])){
+	$page=$_GET["p"];
+	switch ($page) {
+		case 'refresh':
+		include('page/refresh.php');
+		break;
+		
+		case 'em':	
+		include('page/em.php');
+		break;
 
-                        
-                        
+		case 'overview':	
+		include('page/overview.php');
+		break;
+		
+		case 'stats':	
+		include('page/stats.php');
+		break;
 
-                        <p> 
-                        Welcome to the <?php if ($lib->getEventName() != false) {echo $lib->getEventName()."'s";}else{ echo "Modern";}  ?> Event Registration Management, This service will allow you to quickly manage visitors the day of the event, even in offline mode.</p>
-                        <p><a href="em.php" class="btn btn-primary btn-lg" data-original-title="" title="">Easy Management <span class="zicon-right-open-5"></span></a></p>
-                    </div>
-             
+		case 'settings':	
+		include('page/settings.php');
+		break;
+
+		default:
+		$lib->showLandingPage();
+		break;
+	}
+}else{
+	$lib->showLandingPage();
+
+}
+?>
 
 
-<?php include("footer.php"); ?>
 
-  
+
+
+<?php include("page/footer.php"); ?>
+
+
 </body>
 </html>

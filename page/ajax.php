@@ -1,5 +1,5 @@
 <?php 
-require_once ("dbcon.php");
+require_once ("config/dbcon.php");
 require_once ("lib.php");
 
 $lib = new ERS;
@@ -38,5 +38,10 @@ $lib->PrintVisitorBadge($lib->securePostVar($_POST['printAfter']));
 
 
 }
+if (isset($_POST["updateVisitor"]))  { //processing the updated visitor's form
 
+$lib->updateVisitor($_POST);
+
+
+}
 ?>

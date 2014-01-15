@@ -3,8 +3,8 @@
 <mers>
   <config>
     <eventname>ExpoLugha</eventname>
-    <logo>img/event_registration_system.png</logo>
-    <favicon>img/favicon.png</favicon>
+    <logo>assets/img/event_registration_system.png</logo>
+    <favicon>assets/img/favicon.png</favicon>
     <objective>8000</objective>
     <lastrefresh>1386501593</lastrefresh>
     <gsid>0AkeGEqLT7tGfdFJxSEF0b0NOWWlwYlJDX0liVXowVkE</gsid>
