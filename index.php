@@ -1,7 +1,7 @@
 <?php
 /* ========================================================================
 * MERS: Modern Event Registration System
-* https://github.com/a-zog
+* https://github.com/a-zog/ModernERS
 * ========================================================================
 * Copyright (c) 2014 Zoghlami Ahmed
 * 
@@ -16,11 +16,10 @@
 ?>
 
 <?php 
+// same header will be included in each page (except for admin)
 include('page/header.php');
 $lib=new ERS();
 ?>
-
-
 
 
 <?php 
@@ -59,9 +58,9 @@ if (isset($_GET["p"])){
 
 
 
-
-
-<?php include("page/footer.php"); ?>
+<?php
+// same footer will be included in each page (even for admin pages)
+include("page/footer.php"); ?>
 
 
 </body>
