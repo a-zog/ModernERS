@@ -39,7 +39,12 @@ if (isset($_GET["load"])){
 					</div>
 
 					<?php
+					//get older entries in order to let the user modify them in a modal box
+
 					$userInfo= $lib->getVisitorInfo($uid);
+
+
+					//test required to avoid some security issues
 					if ( $userInfo ){
 						?>
 						<div id="callback"></div>
