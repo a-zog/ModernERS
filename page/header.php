@@ -1,7 +1,11 @@
 <?php 
+session_start();
 
+//call basic libraries and external config files
 include('config/dbcon.php');
 require_once ("lib.php");
+
+//create a library object so we can call our predefined functions across the page
 $lib= new ERS;
 
 ?>
@@ -39,11 +43,7 @@ $lib= new ERS;
 
 
 <body>
-<?php 
 
-
-
- ?>
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#zs-example-navbar-collapse-1">

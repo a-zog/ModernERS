@@ -127,145 +127,145 @@ Function list:
 		}
 
 		public function showLandingPage(){
-   ?>
-   <div class="jumbotron">
+			?>
+			<div class="jumbotron">
 
 
-<?php
+				<?php
 
-?><?php if ($this->getEventLogo() != false) {?> <h1>Welcome to <small><img src="<?php echo $this->getEventLogo(); ?>"/></small></h1> <?php }else{ echo "<h1>Welcome !</h1>";} ?>
+				?><?php if ($this->getEventLogo() != false) {?> <h1>Welcome to <small><img src="<?php echo $this->getEventLogo(); ?>"/></small></h1> <?php }else{ echo "<h1>Welcome !</h1>";} ?>
 
-                        
-                        
+				
+				
 
-                        <p> 
-                        Welcome to the <?php if ($this->getEventName() != false) {echo $this->getEventName()."'s";}else{ echo "Modern";}  ?> Event Registration Management, This service will allow you to quickly manage visitors the day of the event, even in offline mode.</p>
-                        <p><a href="em.php" class="btn btn-primary btn-lg" data-original-title="" title="">Easy Management <span class="zicon-right-open-5"></span></a></p>
-                    </div>
+				<p> 
+					Welcome to the <?php if ($this->getEventName() != false) {echo $this->getEventName()."'s";}else{ echo "Modern";}  ?> Event Registration Management, This service will allow you to quickly manage visitors the day of the event, even in offline mode.</p>
+					<p><a href="em.php" class="btn btn-primary btn-lg" data-original-title="" title="">Easy Management <span class="zicon-right-open-5"></span></a></p>
+				</div>
 
-               <?php
-		}
-
-		public function setLastRefresh($time){
-			mysql_query("UPDATE config SET last_refresh = $time");
-
-			if ($this->getLastRefresh() == $time){
-				return true;
-
-			}
-			else{
-				return false;
-			}
-		}
-
-		public function getLastRefresh(){
-			$final= mysql_fetch_array(mysql_query("SELECT cid, last_refresh FROM config"));
-			if ( (!empty($final[1])) && ($final[1] != 0) ){
-
-				return $final[1];
-			}
-			else{
-
-				return "NEVER";
+				<?php
 			}
 
-		}
+			public function setLastRefresh($time){
+				mysql_query("UPDATE config SET last_refresh = $time");
 
+				if ($this->getLastRefresh() == $time){
+					return true;
 
-		public function getGSID(){
-			$final= mysql_fetch_array(mysql_query("SELECT cid, gs_id FROM config"));
-			if (!empty($final[1])){
-
-				return $final[1];
+				}
+				else{
+					return false;
+				}
 			}
-			else{
 
-				trigger_error("Error, there is no source configured !", E_USER_ERROR);
+			public function getLastRefresh(){
+				$final= mysql_fetch_array(mysql_query("SELECT cid, last_refresh FROM config"));
+				if ( (!empty($final[1])) && ($final[1] != 0) ){
+
+					return $final[1];
+				}
+				else{
+
+					return "NEVER";
+				}
+
 			}
-		}
 
 
-		public function getGSTimeStamp($gstime){
-			$date = new DateTime($this->invertDate($gstime));
-			return $date->getTimestamp();
-		}
+			public function getGSID(){
+				$final= mysql_fetch_array(mysql_query("SELECT cid, gs_id FROM config"));
+				if (!empty($final[1])){
 
-		public function getTimeZones(){
+					return $final[1];
+				}
+				else{
 
-			$tz=array(
-				"Europe/Amsterdam",
-				"Europe/Andorra",
-				"Europe/Athens",
-				"Europe/Belfast",
-				"Europe/Belgrade",
-				"Europe/Berlin",
-				"Europe/Bratislava",
-				"Europe/Brussels",
-				"Europe/Bucharest",
-				"Europe/Budapest",
-				"Europe/Busingen",
-				"Europe/Chisinau",
-				"Europe/Copenhagen",
-				"Europe/Dublin",
-				"Europe/Gibraltar",
+					trigger_error("Error, there is no source configured !", E_USER_ERROR);
+				}
+			}
+
+
+			public function getGSTimeStamp($gstime){
+				$date = new DateTime($this->invertDate($gstime));
+				return $date->getTimestamp();
+			}
+
+			public function getTimeZones(){
+
+				$tz=array(
+					"Europe/Amsterdam",
+					"Europe/Andorra",
+					"Europe/Athens",
+					"Europe/Belfast",
+					"Europe/Belgrade",
+					"Europe/Berlin",
+					"Europe/Bratislava",
+					"Europe/Brussels",
+					"Europe/Bucharest",
+					"Europe/Budapest",
+					"Europe/Busingen",
+					"Europe/Chisinau",
+					"Europe/Copenhagen",
+					"Europe/Dublin",
+					"Europe/Gibraltar",
 			//must add other timezones here !
 			//http://www.php.net/manual/fr/timezones.europe.php
 			//"Europe/.......",
 			//"Europe/.......",
 			//"Europe/.......",
-				"Europe/Paris"
-				);
+					"Europe/Paris"
+					);
 
 
-			foreach ($tz as $value) {
+				foreach ($tz as $value) {
 
-				?>
-				<option value="<?php echo $value; ?>" <?php if ($value == "Europe/Paris") { echo "selected"; } ?>><?php echo $value; ?></option>
+					?>
+					<option value="<?php echo $value; ?>" <?php if ($value == "Europe/Paris") { echo "selected"; } ?>><?php echo $value; ?></option>
 
-				<?php
+					<?php
+				}
+
 			}
+			public function invertDate($tm){
+				$tm=str_replace("/", "-", $tm);
+				$date = new DateTime($tm);
 
-		}
-		public function invertDate($tm){
-			$tm=str_replace("/", "-", $tm);
-			$date = new DateTime($tm);
-
-			return date("Y-m-d H:i:s",$date->getTimestamp());
-		}
-		public function moveToBD($allVisitors=array(), $selectedVisitors=array()){
+				return date("Y-m-d H:i:s",$date->getTimestamp());
+			}
+			public function moveToBD($allVisitors=array(), $selectedVisitors=array()){
 
 
-			foreach ($selectedVisitors as $k1 => $smail) {
-				foreach ($allVisitors as $visitor_row) {
-					if ($visitor_row[4] == $smail){
-						echo "match!";
-						var_dump($visitor_row);
-						echo "<hr/>";
-						$vals="'".$visitor_row[1]."','".$visitor_row[2]."','".$visitor_row[3]."','".$visitor_row[6]."','".$visitor_row[4]."','".$visitor_row[5]."','".$visitor_row[7]."','".$this->invertDate(str_replace("/", "-", $visitor_row[0]))."','".$visitor_row[8]."'";
-						$query="INSERT INTO reg_member(firstname, lastname, organisation, address, email, c_number, gender, date, age) VALUES (".$vals.")";
-						echo $query;
+				foreach ($selectedVisitors as $k1 => $smail) {
+					foreach ($allVisitors as $visitor_row) {
+						if ($visitor_row[4] == $smail){
+							echo "match!";
+							var_dump($visitor_row);
+							echo "<hr/>";
+							$vals="'".$visitor_row[1]."','".$visitor_row[2]."','".$visitor_row[3]."','".$visitor_row[6]."','".$visitor_row[4]."','".$visitor_row[5]."','".$visitor_row[7]."','".$this->invertDate(str_replace("/", "-", $visitor_row[0]))."','".$visitor_row[8]."'";
+							$query="INSERT INTO reg_member(firstname, lastname, organisation, address, email, c_number, gender, date, age) VALUES (".$vals.")";
+							echo $query;
 
-						date_default_timezone_set("Europe/Paris");
+							date_default_timezone_set("Europe/Paris");
 
-						$this->setLastRefresh(time('now'));
+							$this->setLastRefresh(time('now'));
 //echo $this->getLastRefresh();
 
 //if (mysql_query($query)){
-						if (true){
-							$this->setLastRefresh(time("now"));
-							?>
-							<div class="alert alert-success">
-								<p><?php echo $visitor_row[1]. " " . $visitor_row[2]; ?> is now included in the Event Registration System.</p>
-							</div>
-							<?php
+							if (true){
+								$this->setLastRefresh(time("now"));
+								?>
+								<div class="alert alert-success">
+									<p><?php echo $visitor_row[1]. " " . $visitor_row[2]; ?> is now included in the Event Registration System.</p>
+								</div>
+								<?php
+							}
 						}
 					}
 				}
 			}
-		}
 
-		public function isNewEntry($entry_time){
-			if (($this->getGSTimeStamp($entry_time) >= $this->getLastRefresh()) && ($this->getLastRefresh() != "NEVER") ){
+			public function isNewEntry($entry_time){
+				if (($this->getGSTimeStamp($entry_time) >= $this->getLastRefresh()) && ($this->getLastRefresh() != "NEVER") ){
 			/*echo "PING!";
 						echo "<br/>PING! ".date("Y-m-d H:i:s",$this->getGSTimeStamp($entry_time))." >= ".date("Y-m-d H:i:s",$this->getLastRefresh());
 						echo "<hr/>";

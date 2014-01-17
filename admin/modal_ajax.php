@@ -146,6 +146,8 @@ if (isset($_GET["load"])){
 				</div>
 				<script type="text/javascript">
 					$(document).ready( function() {
+
+						//Submit new modified data using AJAX 
 						$('.modal-dialog form').on('submit', function(event) {
 							event.preventDefault()
 							$.post( $(this).attr('action'), $(this).serialize(), function(data) {
