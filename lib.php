@@ -140,7 +140,7 @@ Function list:
 
 				<p> 
 					Welcome to the <?php if ($this->getEventName() != false) {echo $this->getEventName()."'s";}else{ echo "Modern";}  ?> Event Registration Management, This service will allow you to quickly manage visitors the day of the event, even in offline mode.</p>
-					<p><a href="em.php" class="btn btn-primary btn-lg" data-original-title="" title="">Easy Management <span class="zicon-right-open-5"></span></a></p>
+					<p><a href="?p=em" class="btn btn-primary btn-lg" data-original-title="" title="">Easy Management <span class="zicon-right-open-5"></span></a></p>
 				</div>
 
 				<?php
