@@ -46,6 +46,10 @@ if (isset($_GET["p"])){
 		include('page/settings.php');
 		break;
 
+		case 'about':	
+		include('page/about.php');
+		break;
+
 		default:
 		$lib->showLandingPage();
 		break;

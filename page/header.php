@@ -78,7 +78,7 @@ $lib= new ERS;
     </ul>
 <ul class="nav navbar-nav pull-right">
             
-        <li><a href="#"><i class="zicon-info-circled-alt"></i> About</a></li>
+        <li><a href="?p=about"><i class="zicon-info-circled-alt"></i> About</a></li>
         </ul>
 
 </div>
