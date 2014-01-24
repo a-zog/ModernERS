@@ -158,6 +158,65 @@ Function list:
 				}
 			}
 
+			public function getStat($subject){
+				if  (!empty($subject) ){
+					switch ($subject) {
+						case 'total':
+						$result= mysql_fetch_row(mysql_query("SELECT COUNT(member_id) FROM reg_member "));
+						$result=$result[0];
+						break;
+						case 'men':
+						case 'women':
+						if ($subject== "men"){
+							$subject="male";
+						}else{
+							$subject="female";
+						}
+
+						$result= mysql_fetch_row(mysql_query("SELECT COUNT(member_id) FROM reg_member WHERE gender='$subject'"));
+						$result=$result[0];
+						break;
+						case 'registration':
+						case 'registration_cumul':
+
+
+
+						$sql="select DATE(r_date), count(member_id)
+						from reg_member
+						GROUP BY DATE(r_date)";
+
+						$data= mysql_query($sql);
+						$result = array();
+						$reg=0;
+						while($row = mysql_fetch_array($data))
+						{
+
+							if ($subject=="registration_cumul"){
+								$reg=(int)$row[1]+$reg;
+							}else{
+								$reg=(int)$row[1];
+							}
+							$result[]= array("y"=>$row[0], "a"=>$reg);
+						}
+						$result=json_encode($result);
+
+
+						break;
+
+						default:
+						$result="ERROR";
+						break;
+					}
+
+
+					return $result;
+				}
+				else{
+
+					return "ERROR";
+				}
+
+			}
 			public function getLastRefresh(){
 				$final= mysql_fetch_array(mysql_query("SELECT cid, last_refresh FROM config"));
 				if ( (!empty($final[1])) && ($final[1] != 0) ){
@@ -238,12 +297,12 @@ Function list:
 				foreach ($selectedVisitors as $k1 => $smail) {
 					foreach ($allVisitors as $visitor_row) {
 						if ($visitor_row[4] == $smail){
-							echo "match!";
-							var_dump($visitor_row);
-							echo "<hr/>";
+
+
 							$vals="'".$visitor_row[1]."','".$visitor_row[2]."','".$visitor_row[3]."','".$visitor_row[6]."','".$visitor_row[4]."','".$visitor_row[5]."','".$visitor_row[7]."','".$this->invertDate(str_replace("/", "-", $visitor_row[0]))."','".$visitor_row[8]."'";
-							$query="INSERT INTO reg_member(firstname, lastname, organisation, address, email, c_number, gender, date, age) VALUES (".$vals.")";
-							echo $query;
+							$query="INSERT INTO reg_member(firstname, lastname, organisation, address, email, c_number, gender, r_date, age) VALUES (".$vals.")";
+
+
 
 							date_default_timezone_set("Europe/Paris");
 
@@ -266,7 +325,8 @@ Function list:
 
 			public function isNewEntry($entry_time){
 				if (($this->getGSTimeStamp($entry_time) >= $this->getLastRefresh()) && ($this->getLastRefresh() != "NEVER") ){
-			/*echo "PING!";
+			/*
+			echo "Yes!";
 						echo "<br/>PING! ".date("Y-m-d H:i:s",$this->getGSTimeStamp($entry_time))." >= ".date("Y-m-d H:i:s",$this->getLastRefresh());
 						echo "<hr/>";
 						$x = new DateTime(date("Y-m-d H:i:s",$this->getGSTimeStamp($entry_time)));
@@ -592,7 +652,7 @@ public function addNewVisitor($userForm){
 	}
 
 	if ((isset($userForm["age"])) && ($userForm["age"] != "")){
-		$age=$this->securePostVar($userForm["age"]);
+		$age=(int) $this->securePostVar($userForm["age"]);
 		if (is_int($age)){
 			$col.= "age,";			
 			$vals.= $age.",";
@@ -604,6 +664,7 @@ public function addNewVisitor($userForm){
 			</div>
 
 			<?php
+
 			exit(0);
 		}
 	}
@@ -635,8 +696,10 @@ public function addNewVisitor($userForm){
 		$vals.= "'".$organisation."',";
 
 	}
+	$col.= "r_date,";
+	$vals.= "'".date("Y-m-d H:i:s")."',";
+//2013-01-24 18:09:28
 	$query="INSERT INTO reg_member(".substr($col, 0, -1).") VALUES (".substr($vals, 0, -1).")";
-	echo $query;
 		//if (true){
 	if (mysql_query($query)){
 

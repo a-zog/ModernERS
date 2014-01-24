@@ -19,6 +19,7 @@ $lib= new ERS;
     <link href="assets/css/zogstrap.min.css" rel="stylesheet" type="text/css" media="screen">
 
     <link href="assets/css/datatables.bootstrap.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="assets/css/morris.css" rel="stylesheet" type="text/css" media="screen">
     <link href="assets/css/adds.css" rel="stylesheet" type="text/css" media="screen">
 
 
@@ -30,6 +31,8 @@ $lib= new ERS;
 
     <script src="assets/js/jquery-latest.min.js" type="text/javascript"></script>
     <script src="assets/js/zogstrap.min.js" type="text/javascript"></script> 
+    <script src="assets/js/raphael-2.1.0.min.js" type="text/javascript"></script> 
+    <script src="assets/js/morris.min.js" type="text/javascript"></script> 
     <script src="assets/js/jquery.dataTables.js" type="text/javascript"></script>
     <script src="assets/js/dataTables.bootstrap.js" type="text/javascript"></script>
     <script src="assets/js/hogan-2.0.0.js" type="text/javascript"></script>

@@ -48,6 +48,9 @@ if (isset($_GET["p"])){
 
 		case 'about':	
 		include('page/about.php');
+
+		case 'stats':	
+		include('page/stats.php');
 		break;
 
 		default:
