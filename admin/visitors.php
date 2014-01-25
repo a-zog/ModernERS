@@ -27,7 +27,7 @@
          ?>
 
          <tr class="del<?php echo $id ?>">
-             <td><?php echo $row['date']; ?></td>
+             <td><?php echo $row['r_date']; ?></td>
              <td><?php echo $row['firstname']." ".$row['lastname']; ?></td>
              <td><?php echo $row['organisation']; ?></td>
              <td><?php echo $row['address']; ?></td>
@@ -52,9 +52,9 @@
  <script type="text/javascript">
     $(document).ready( function() {
 
-       $('#dtable').dataTable();
-
-       $('.delete_member').click( function() {
+       $('#dtable').dataTable({
+        "fnDrawCallback": function () {
+             $('.delete_member').click( function() {
           
         var id = $(this).attr("id");
         
@@ -71,6 +71,8 @@
         }
         return false;
     });       
+
+
        $('.edit_member').click( function() {
 
         var id = $(this).data("id");
@@ -88,7 +90,13 @@
 
 
         return false;
-    });				
+    });         
+    
+    console.log("btn init ok");   
+        }
+    } );
+
+    	
    });
 </script>
 

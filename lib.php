@@ -34,6 +34,10 @@ Function list:
 	showLandingPage(): display the MERS landing page
 
 
+	(get)getStat($subject): calculate requested stat
+	(boolean)inAgeInterval($theInt, $theinterval): check if the value is in an interval
+
+
 	(get/set)LastRefresh(): read/write the last refreshed entries
 	(get)GSID(): retrieve the Google Spreadsheet ID from the database
 	(get)GSTimeStamp(): [with a little hack] retrieve the timestamp of Google Spreadsheet date
@@ -158,6 +162,13 @@ Function list:
 				}
 			}
 
+			public function inAgeInterval($theInt, $interval){
+				if ( ($theInt >= $interval["lower"]) && ($theInt <= $interval["higher"]) ){
+					return true;
+
+				}
+				return false;
+			}
 			public function getStat($subject){
 				if  (!empty($subject) ){
 					switch ($subject) {
@@ -199,13 +210,77 @@ Function list:
 							$result[]= array("y"=>$row[0], "a"=>$reg);
 						}
 						$result=json_encode($result);
-
-
 						break;
+
+
+
+						case 'registration_ages':
+
+						$sql="select age, count(member_id)
+						from reg_member
+						GROUP BY age";
+
+						$data= mysql_query($sql);
+						$result = array();
+
+						while($row = mysql_fetch_array($data))
+						{
+							$result[]= array("y"=>$row[0], "a"=>(int)$row[1]);
+						}
+						$result=json_encode($result);
+						break;
+
+						case 'registration_ages_interval':
+						$sql="select member_id, age from reg_member";
+
+						$data= mysql_query($sql);
+
+						$result = array();
+
+						$children=0; //0 - 19 years old
+						$children_bounds=array("lower"=>0, "higher" =>19);
+						$youth=0; //20-35
+						$youth_bounds=array("lower"=>20, "higher" =>35);
+						$mature=0; //36-59
+						$mature_bounds=array("lower"=>36, "higher" =>59);
+						$senior=0; //59-100
+						$senior_bounds=array("lower"=>59, "higher" =>100);
+
+
+
+						while($row = mysql_fetch_array($data))
+						{
+							if ($this->inAgeInterval ( (int)$row[1], $children_bounds ) ){
+								$children+=1;
+							}
+
+							if ($this->inAgeInterval ( (int)$row[1], $youth_bounds ) ){
+								$youth+=1;
+							}
+
+							if ($this->inAgeInterval ( (int)$row[1], $mature_bounds ) ){
+								$mature+=1;
+							}
+
+							if ($this->inAgeInterval ( (int)$row[1], $senior_bounds ) ){
+								$senior+=1;
+							}
+
+						}
+						$result[]= array("y"=>"children", "a"=>$children);
+						$result[]= array("y"=>"youth", "b"=>$youth);
+						$result[]= array("y"=>"mature", "c"=>$mature);
+						$result[]= array("y"=>"senior", "d"=>$senior);
+						
+						$result=json_encode($result);
+						break;
+
 
 						default:
 						$result="ERROR";
 						break;
+
+
 					}
 
 

@@ -8,6 +8,7 @@ Made using:
 
 - JQuery
 - PHP
+- [Morris Graph JS](https://github.com/oesmith/morris.js) based on [Raphael Vector graphics JS library](https://github.com/DmitryBaranovskiy/raphael/)
 - [ZogStrap](http://github/a-zog/ZogStrap/)
 
 Current Features:
@@ -15,11 +16,12 @@ Current Features:
 
 - Quick visitor's management (add & check visitors, quick typehead...)
 - Quick print badges
-- Stats dashboard
+- Stats dashboard (with goal settings)
 - Easy customization for your next event
 - Visitors and users management throught an admin interface
 - Get the list of visitors through an external stream (Google Spreadsheet only for now)
 - Save Settings into an XML document
+- You can use it offline almost 100% time (except for third-party synchronisation features) 
 
 
 Features to come:

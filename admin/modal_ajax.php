@@ -1,6 +1,6 @@
 
 <?php
-include('../dbcon.php');
+include('../config/dbcon.php');
 require_once("../lib.php");
 if (isset($_GET["load"])){
 	$load=$_GET["load"];
@@ -109,7 +109,7 @@ if (isset($_GET["load"])){
 								<div class="form-group">
 									<label class="control-label col-sm-4" for="c_number">Contact Number</label>
 									<div class="controls col-md-8">
-										<input type="text" class=" form-control" value="<?php echo $userInfo['c_number']; ?>" name="c_number" id="c_number" placeholder="Contact Number" required="">
+										<input type="text" class=" form-control" value="<?php echo $userInfo['c_number']; ?>" name="c_number" id="c_number" placeholder="Contact Number" >
 									</div>
 								</div>
 
