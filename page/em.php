@@ -123,6 +123,7 @@ include("page/em_menu.php");
                         <input type="hidden"  name="newVisitor"  value="true">
                         <button type="button" name="newVisitorSubmitted" id="newVisitorSubmitted" class="btn btn-success">Save</button>
                         <button type="button" name="newVisitorSubmittedandPrint" id="newVisitorSubmittedandPrint" class="btn btn-info">Save and Print Badge</button>
+                        <button type="reset" name="newVisitorCancel" id="newVisitorSubmittedandPrint"  data-toggle="tooltip" data-placement="bottom" title="Clear the form" class="btn btn-sm btn-danger" ><i class="zicon-cancel"></i></button>
                     </div>
                 </form>
             </div>

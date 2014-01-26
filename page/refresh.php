@@ -30,10 +30,7 @@
                 if (isset($_POST["visitor"])){
 
                     $visitors=$_POST["visitor"];
-
                     $allVisitors= $lib->getSpreadsheetData($lib->getGSID());
-//var_dump($visitors);
-//var_dump($allVisitors);
 
                     $lib->moveToBD($allVisitors,$visitors);
 

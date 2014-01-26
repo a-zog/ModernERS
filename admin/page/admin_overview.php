@@ -1,13 +1,12 @@
-
-
+<?php ?>
 <div class="container">
-    
     <?php
     $title="Overview";
 
-    include("page/em_menu.php");
-    ?>
+    include("admin_menu.php");
+    $lib= new ERS;
 
+    ?>
     <div class="col-md-8">
 
         <div class="panel panel-default">
@@ -54,6 +53,7 @@
         </div>
     </div>
 </div>
+
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -61,17 +61,24 @@
         </div>
         <div class="panel-body">
 
-            <div class="col-md-3">
-                <a href="?p=overview" class="btn btn-block btn-success btn-lg"><i class="zicon-eye-1"></i> Overview</a>
+            <div class="col-md-2">
+                <a href="home.php" class="btn btn-block btn-success btn-lg"><i class="zicon-eye-1"></i> Overview</a>
             </div>  
-            <div class="col-md-3">
-                <a href="?p=em" class="btn btn-block btn-primary btn-lg"><i class="zicon-address-book"></i> Easy Management</a></a>
+            <div class="col-md-2">
+                <a href="home.php?p=visitors" class="btn btn-block btn-primary btn-lg"><i class="zicon-user"></i> Visitors</a></a>
             </div>
-            <div class="col-md-3">
-                <a href="?p=refresh" class="btn btn-block btn-primary btn-lg"><i class="zicon-arrows-cw-1"></i> Refresh visitor's list</a></a>
+            <div class="col-md-2">
+                <a href="home.php?p=users" class="btn btn-block btn-primary btn-lg"><i class="zicon-users"></i> Users</a></a>
             </div>  
-
-
+            <div class="col-md-2">
+                <a href="home.php?p=stats" class="btn btn-block btn-primary btn-lg"><i class="zicon-chart-line"></i> Statistics</a></a>
+            </div>
+            <div class="col-md-2">
+                <a href="home.php?p=report" class="btn btn-block btn-primary btn-lg"><i class="zicon-chart-pie-2"></i> Reporting</a></a>
+            </div>
+            <div class="col-md-2">
+               <a href="home.php?p=settings" class="btn btn-block btn-primary btn-lg"><i class="zicon-cog"></i> Settings</a>
+            </div>
         </div>
     </div>
 </div>

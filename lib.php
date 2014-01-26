@@ -38,14 +38,16 @@ Function list:
 	(boolean)inAgeInterval($theInt, $theinterval): check if the value is in an interval
 
 
-	(get/set)LastRefresh(): read/write the last refreshed entries
+	(get)getPercent($pvar, $onehundred): retrieve the $var percentage from the $onehundred var
+	(get)getObjective(): retrieve the registration objective from the database
 	(get)GSID(): retrieve the Google Spreadsheet ID from the database
+	(get/set)LastRefresh(): read/write the last refreshed entries
 	(get)GSTimeStamp(): [with a little hack] retrieve the timestamp of Google Spreadsheet date
 	(get)GSTimeStamp(): retrieve the timestamp of Google Spreadsheet date
 	(get)TimeZones(): a list of timezones to display. We need to synchronize both MERS and Google Spreadsheet's timezone
 	to be sure that we retreive only freshly subscribed visitors
 	invertDate(): Useful when inverting Google spreadsheet dates (american format)
-	moveToBD(): Move an array of users to the database 
+	moveToBD($allVisitors=array(), $selectedVisitors=array()): Move an array of users to the database 
 	isNewEntry(): Check if the visitor is new and he wasn't included in the database before (to avoid double entries)
 	getSpreadsheetData($gsid): Get a list of entries from Google Spreadsheet
 	updateVisitorList(): Display the visitor's list retrieved from a Google spreadsheet
@@ -64,7 +66,10 @@ Function list:
 
 
 	<?php
-
+	//required for document export to PDF
+	//you can have more documentation on: http://fpdf.org/
+	require ("assets/php_libs/fpdf.php");
+	
 	class ERS {
 
 		//true to Turn XML on 
@@ -271,7 +276,7 @@ Function list:
 						$result[]= array("y"=>"youth", "b"=>$youth);
 						$result[]= array("y"=>"mature", "c"=>$mature);
 						$result[]= array("y"=>"senior", "d"=>$senior);
-						
+
 						$result=json_encode($result);
 						break;
 
@@ -306,6 +311,14 @@ Function list:
 			}
 
 
+
+
+			public function getGSTimeStamp($gstime){
+				$date = new DateTime($this->invertDate($gstime));
+				return $date->getTimestamp();
+			}
+
+
 			public function getGSID(){
 				$final= mysql_fetch_array(mysql_query("SELECT cid, gs_id FROM config"));
 				if (!empty($final[1])){
@@ -318,10 +331,35 @@ Function list:
 				}
 			}
 
+			public function getPercent($pvar, $onehundred){
+				if ($onehundred !=0){
+					return ( ($pvar * 100) / $onehundred );
+ 				}
+				return 100;
+			}
 
-			public function getGSTimeStamp($gstime){
-				$date = new DateTime($this->invertDate($gstime));
-				return $date->getTimestamp();
+			public function setObjective($objective){
+
+				mysql_query("UPDATE config SET objective = $objective");
+
+				if ($this->getObjective() == $objective){
+					return true;
+
+				}
+				else{
+					return false;
+				}
+			}
+
+			public function getObjective(){
+				$final= mysql_fetch_array(mysql_query("SELECT cid, objective FROM config"));
+				if (!empty($final[1])){
+
+					return $final[1];
+				}
+				else{
+					return 0;
+				}
 			}
 
 			public function getTimeZones(){
@@ -371,21 +409,20 @@ Function list:
 
 				foreach ($selectedVisitors as $k1 => $smail) {
 					foreach ($allVisitors as $visitor_row) {
+					
 						if ($visitor_row[4] == $smail){
 
 
-							$vals="'".$visitor_row[1]."','".$visitor_row[2]."','".$visitor_row[3]."','".$visitor_row[6]."','".$visitor_row[4]."','".$visitor_row[5]."','".$visitor_row[7]."','".$this->invertDate(str_replace("/", "-", $visitor_row[0]))."','".$visitor_row[8]."'";
+							$vals="'".$visitor_row[1]."','".$visitor_row[2]."','".$visitor_row[3]."','".$visitor_row[6]."','".$visitor_row[4]."','".$visitor_row[5]."','".$visitor_row[7]."','".$this->invertDate(str_replace("/", "-", $visitor_row[0]))."',".(int)$visitor_row[8];
 							$query="INSERT INTO reg_member(firstname, lastname, organisation, address, email, c_number, gender, r_date, age) VALUES (".$vals.")";
-
 
 
 							date_default_timezone_set("Europe/Paris");
 
 							$this->setLastRefresh(time('now'));
-//echo $this->getLastRefresh();
 
-//if (mysql_query($query)){
-							if (true){
+if (mysql_query($query)){
+							
 								$this->setLastRefresh(time("now"));
 								?>
 								<div class="alert alert-success">
@@ -419,9 +456,8 @@ Function list:
 				public function getSpreadsheetData($gsid){
 
 					$spreadsheet_url='https://docs.google.com/spreadsheet/pub?key='.$gsid.'&single=true&output=csv';
-
-					try {
-
+try
+{
 
 						if(!ini_set('default_socket_timeout',    15)) echo "<!-- unable to change socket timeout -->";
 						$i=0;
@@ -445,8 +481,9 @@ Function list:
 				}
 			}
 			fclose($handle);
-		} catch (Exception $e) {
-			echo "<strong>Critical Error: ".$e."</strong>";
+}
+ catch (Exception $e) {
+			echo "<strong>Critical Error. We couldn't establish a connection with the spreadsheet</strong>";
 		}
 		//unset($spreadsheet_data[0]);
 		//return array_values($spreadsheet_data);
@@ -538,6 +575,43 @@ public function PrintVisitorBadge($email){
 	echo "launch print command now!";
 }
 
+public function deleteVisitor($userForm){
+	$uid=$userForm["uid"];
+	$q="DELETE FROM reg_member WHERE member_id=$uid";
+	if (mysql_query($q)){
+		?>
+
+		<div class="modal-body">
+			<div class="alert alert-success fade in">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<p>User as successfully deleted.</p>
+			</div>
+		</div>
+		<div class="modal-footer">
+		<button class="btn btn-default" data-dismiss="modal" aria-hidden="true"><i class="zicon-cancel"></i>&nbsp;Close</button>
+
+		</div>
+		
+
+		<?php 
+	} else{
+		?>
+
+		<div class="modal-body">
+
+
+			<div class="alert alert-danger fade in">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<p>User wasn't found, nothing happened.</p>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true"><i class="zicon-cancel"></i>&nbsp;Close</button>
+
+		</div>
+		<?php 
+	}
+}
 public function updateVisitor($userForm){
 	$q="";
 	$oldEntry= $this->getVisitorInfo($userForm["uid"]);

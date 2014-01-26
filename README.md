@@ -9,6 +9,7 @@ Made using:
 - JQuery
 - PHP
 - [Morris Graph JS](https://github.com/oesmith/morris.js) based on [Raphael Vector graphics JS library](https://github.com/DmitryBaranovskiy/raphael/)
+- [FPDF](http://fpdf.org/)
 - [ZogStrap](http://github/a-zog/ZogStrap/)
 
 Current Features:
@@ -23,11 +24,19 @@ Current Features:
 - Save Settings into an XML document
 - You can use it offline almost 100% time (except for third-party synchronisation features) 
 
+Third-party inputs:
+=========================
+
+- Google Spreadsheet/form:
+-- The form used: [Modern-ERS Google Form](https://docs.google.com/forms/d/133WRFfahYm32kSMeA1VZkA76ap-3BMKH-kTBX8atzw0)
+-- The spreadsheet: [Modern-ERS Google Spreadsheet](https://docs.google.com/spreadsheet/ccc?key=0AkeGEqLT7tGfdFJxSEF0b0NOWWlwYlJDX0liVXowVkE)  (please: File > Make a Copy... to not alterate base examples.)
+
 
 Features to come:
 =========================
 
 - Add third-party input streams
+- Reporting & PDF export
 - Advanced settings (not functional till now)
 
 Licence/Attribution:

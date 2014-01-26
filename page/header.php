@@ -19,7 +19,6 @@ $lib= new ERS;
     <link href="assets/css/zogstrap.min.css" rel="stylesheet" type="text/css" media="screen">
 
     <link href="assets/css/datatables.bootstrap.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="assets/css/morris.css" rel="stylesheet" type="text/css" media="screen">
     <link href="assets/css/adds.css" rel="stylesheet" type="text/css" media="screen">
 
 
@@ -31,13 +30,13 @@ $lib= new ERS;
 
     <script src="assets/js/jquery-latest.min.js" type="text/javascript"></script>
     <script src="assets/js/zogstrap.min.js" type="text/javascript"></script> 
-    <script src="assets/js/raphael-2.1.0.min.js" type="text/javascript"></script> 
-    <script src="assets/js/morris.min.js" type="text/javascript"></script> 
     <script src="assets/js/jquery.dataTables.js" type="text/javascript"></script>
     <script src="assets/js/dataTables.bootstrap.js" type="text/javascript"></script>
     <script src="assets/js/hogan-2.0.0.js" type="text/javascript"></script>
     <script src="assets/js/typeahead.min.js" type="text/javascript"></script>
     <script src="assets/js/init.js" type="text/javascript"></script>
+    <script src="assets/js/main.js" type="text/javascript"></script>
+    
     
 </head>
 
@@ -46,16 +45,13 @@ $lib= new ERS;
 
 
 <body>
-
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#zs-example-navbar-collapse-1">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-    </div>
 <div class="navbar-header">
       <a href="./" class="navbar-brand" data-original-title="" title=""><i class="zicon-flash-1 pulse"></i> <?php if ($lib->getEventName() != false) {echo $lib->getEventName()." - ";}else{ echo "Modern ";}  ?> ERS</a>
 
@@ -71,22 +67,22 @@ $lib= new ERS;
                 <li class="divider"></li>
                 <li><a href="?p=em"><i class="zicon-address-book"></i> Easy Management</a></li>
                 <li><a href="?p=refresh"><i class="zicon-arrows-cw-1"></i> Refresh visitor's list</a></li>
-                <li><a href="?p=stats"><i class="zicon-chart-line"></i> Statistics</a></li>
             </ul>
         </li>
 
-        <li><a href="?p=settings"><i class="zicon-cog"></i> Settings</a></li>
-        <li><a href="admin"><i class="zicon-key-2"></i> Admin</a></li>
         
     </ul>
 <ul class="nav navbar-nav pull-right">
             
+        <li><a href="admin"><i class="zicon-key-2"></i> Admin</a></li>
         <li><a href="?p=about"><i class="zicon-info-circled-alt"></i> About</a></li>
         </ul>
 
 </div>
 </nav>
 
+  <p class="text-center">
 
-
+    <img src="<?php if ($lib->getEventLogo() ) {echo $lib->getEventLogo();}else{ echo "assets/img/modern_ers_logo.png";}  ?>"/>
+  </p>
 

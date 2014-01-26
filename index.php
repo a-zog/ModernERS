@@ -38,21 +38,11 @@ if (isset($_GET["p"])){
 		include('page/overview.php');
 		break;
 		
-		case 'stats':	
-		include('page/stats.php');
-		break;
-
-		case 'settings':	
-		include('page/settings.php');
-		break;
-
 		case 'about':	
 		include('page/about.php');
-
-		case 'stats':	
-		include('page/stats.php');
 		break;
 
+		
 		default:
 		$lib->showLandingPage();
 		break;

@@ -6,14 +6,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    Logout
+                   <i class="zicon-logout-3"></i> Logout
                 </div>
                 <div class="modal-body">
                     <p>Are you sure you want to Logout?</p>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true"><i class="zicon-remove"></i>&nbsp;Close</button>
-                    <a href="logout.php" class="btn btn-danger"><i class="zicon-signout"></i>&nbsp;Logout</a>
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true"><i class="zicon-cancel"></i>&nbsp;Close</button>
+                    <a href="index.php?p=logout" class="btn btn-danger"><i class="zicon-logout-3"></i>&nbsp;Logout</a>
                 </div>
             </div>
         </div>
