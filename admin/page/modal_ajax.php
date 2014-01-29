@@ -19,7 +19,14 @@ if (isset($_GET["load"])){
 					<div id="callback">
 					<form class="form-horizontal" action="../page/ajax.php" id="updateObjectiveForm" role="form" method="POST">
 						<div class="modal-body">
-						<strong>Set a new objective:</strong> <input type="number" placeholder="A number here" name="inputObjective" value="<?php echo $lib->getObjective(); ?>">
+
+						<div class="form-group">
+									<label class="control-label col-sm-4" for="inputObjective"><strong>Set a new objective:</strong></label>
+									<div class="controls col-md-7">
+									 <input type="number"  class="form-control" placeholder="A number here" name="inputObjective" value="<?php echo $lib->getObjective(); ?>">
+									</div>
+								</div>
+						
 						<input type="hidden" name="editObjective" value="true">
 
 						</div>
