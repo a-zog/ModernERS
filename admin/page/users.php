@@ -13,10 +13,6 @@
     <div class="panel-body">
 
         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
-            <div class="alert alert-info">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong><i class="icon-user icon-large"></i>&nbsp;User Table</strong>
-            </div>
             <thead>
                 <tr>
                     <th>Username</th>

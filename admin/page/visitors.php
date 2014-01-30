@@ -14,10 +14,7 @@
     <div id="test"></div>
 
     <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="dtable">
-      <div class="alert alert-info">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong><i class="icon-user icon-large"></i>&nbsp;Registered Member</strong>
-      </div>
+
       <thead>
         <tr>
           <th>Date Register</th>
