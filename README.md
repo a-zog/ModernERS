@@ -2,6 +2,7 @@ Moden-Event-Registration-System
 =========================
 
 A light Event Registration System including an admin interface.
+![This is how it looks like](https://lh3.googleusercontent.com/-mlknkIcWUPQ/Uuqxkl8G3II/AAAAAAAAFAg/1g2MaQWXoXs/w800-h500-no/capture_modern_ers.jpg)
 
 Made using:
 =========================
