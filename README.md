@@ -10,7 +10,7 @@ Made using:
 - JQuery
 - PHP
 - [Morris Graph JS](https://github.com/oesmith/morris.js) based on [Raphael Vector graphics JS library](https://github.com/DmitryBaranovskiy/raphael/)
-- [FPDF](http://fpdf.org/)
+- [FPDF](http://fpdf.org/) - soon
 - [ZogStrap](http://github/a-zog/ZogStrap/) - Online soon
 
 Current Features:
