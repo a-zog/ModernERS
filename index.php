@@ -1,7 +1,7 @@
 <?php
 /* ========================================================================
 * MERS: Modern Event Registration System
-* https://github.com/a-zog/ModernERS
+* Check out https://github.com/a-zog/ModernERS for more info
 * ========================================================================
 * Copyright (c) 2014 Zoghlami Ahmed
 * 
